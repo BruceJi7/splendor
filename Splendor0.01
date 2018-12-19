@@ -1,0 +1,85 @@
+
+from typing import Any
+
+class Player:
+    def __init__(
+        self, 
+        name: str = 'Unknown',
+        
+        score: int = 0,
+        
+        red_tokens: int = 0, 
+        blue_tokens: int = 0, 
+        green_tokens: int = 0, 
+        black_tokens: int = 0,
+        white_tokens: int = 0,
+        
+        patrons: Any = None,  # TODO improve the type hint
+        cards: Any = None  # TODO improve the type hint
+        
+    ):
+        self.name = name
+        self.score = score
+        self.red_tokens = red_tokens
+        self.blue_tokens = blue_tokens
+        self.green_tokens = green_tokens
+        self.black_tokens = black_tokens
+        self.white_tokens = white_tokens
+        self.total_tokens = sum([red_tokens, blue_tokens, green_tokens, black_tokens, white_tokens])
+
+        self.patrons = patrons
+        self.cards = cards
+
+    def __repr__(self):
+        return f'Player(name={self.name}, red_tokens={self.red_tokens}, blue_tokens={self.blue_tokens}, green_tokens={self.green_tokens}, black_tokens={self.black_tokens}, white_tokens={self.white_tokens})'
+
+    def __str__(self):
+        return f'{self.name}: red={self.red_tokens}, blue={self.blue_tokens}, green={self.green_tokens}, black={self.black_tokens}, white={self.white_tokens}, total={self.total_tokens}'
+
+    def can_pick_up_tokens(self):
+        return self.total_tokens <= 10
+
+class card:
+    def __init__(
+        self,
+        colour: str = '',
+        point_value: int = 0 ,
+        required_red: int = 0,
+        required_blue: int = 0,
+        required_green: int = 0,
+        required_black: int = 0,
+        required_white: int = 0
+    ):
+        
+        self.colour = str(colour)
+        self.point_value = point_value
+        self.req_red = required_red
+        self.req_blu = required_blue
+        self.req_gre = required_green
+        self.req_bla = required_black
+        self.req_whi = required_white
+    
+    def __repr__(self):
+        return f'{self}: colour={self:colour}, point_value={self:point_value}, required_red={self.required_red}, required_blue={self.required_blue}, required_green={self.required_green}, required_black={self.required_black}, required_white={self.required_white}'
+     
+    def __str__(self):
+        return f'{self}: colour={self:colour}, point_value={self:point_value}, requirements: red={self.required_red}, blue={self.required_blue}, green={self.required_green}, white={self.required_white}, black={self.required_black}'
+    
+    
+card001 = card('red', 1, 1, 3, 2, 2, 0)
+card002 = card('blue', 2, 1, 3, 3, 2, 0)
+
+
+
+playerOne = Player()
+
+playerOne.red_tokens = 8
+playerOne.blue_tokens = 0
+playerOne.green_tokens = 6
+playerOne.black_tokens = 3
+playerOne.white_tokens = 0
+
+
+print(playerOne.total_tokens)
+print(playerOne.can_pick_up_tokens())
+
